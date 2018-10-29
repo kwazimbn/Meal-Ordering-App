@@ -60,7 +60,7 @@ public class Register extends AppCompatActivity {
                 uPassword = editTextUpassword.getText().toString();
                 uCpassword = editTextUcPassword.getText().toString();
 
-                if(!uEmail.contains("@")|| !uEmail.contains(".com")|| !uEmail.contains(".co.za")|| !uEmail.contains(".ac.za")|| !uEmail.contains(".org")|| !uEmail.contains(".net")){
+                if(!uEmail.contains("@")){
                     Toast.makeText(getApplicationContext(), "Invalid email", Toast.LENGTH_LONG).show();
                     editTextUeMail.setText("");
 

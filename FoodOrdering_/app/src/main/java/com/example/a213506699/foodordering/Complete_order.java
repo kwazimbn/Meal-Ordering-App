@@ -108,6 +108,15 @@ public class Complete_order extends AppCompatActivity {
         GetCompleteOrder getCompleteOrder = new GetCompleteOrder();
         getCompleteOrder.execute("");
 
+        cancel = findViewById(R.id.btn_Cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),Cart.class));
+            }
+        });
+
+
         completeOrder = findViewById(R.id.btn_CompleteOrder);
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         completeOrder.setOnClickListener(new View.OnClickListener() {
@@ -121,11 +130,8 @@ public class Complete_order extends AppCompatActivity {
                 String orderDate = dateFormat.format(date);
 
                 AddToOrder addToOrder = new AddToOrder(myShopID, myLoginID, "Pending", locationSelector.getSelectedItem().toString(), price, orderDate);
-
-                if (price != 0)
                     addToOrder.execute("");
-                else
-                    Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_LONG);
+
 
                 SharedPreferences mySharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 int userId = mySharedPref.getInt("loginUserID", 0);

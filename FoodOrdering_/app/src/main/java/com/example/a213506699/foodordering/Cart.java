@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -40,6 +41,7 @@ public class Cart extends AppCompatActivity {
     SharedPreferences mySharedPref;
     int loggedInStatus;
     Intent intent;
+    double price;
 
     private static final String TAG = "Cart";
     private ConnectionClass connectionClass;
@@ -59,7 +61,7 @@ public class Cart extends AppCompatActivity {
             item2.setVisible(false);
         else
             item2.setVisible(false);
-            item3.setVisible(false);
+        item3.setVisible(false);
         return true;
 
     }
@@ -71,7 +73,10 @@ public class Cart extends AppCompatActivity {
                 startActivity(new Intent(this, MainActivity.class));
                 return true;
             case R.id.account:
-                startActivity(new Intent(this, Account.class));
+                if (loggedInStatus == 1)
+                    startActivity(new Intent(this, Account.class));
+                else
+                    startActivity(new Intent(this, Login.class));
                 return true;
             default:
                 return false;
@@ -88,7 +93,6 @@ public class Cart extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Cart");
 
-
         connectionClass = new ConnectionClass();
         GetCartItems getCartItems = new GetCartItems();
         getCartItems.execute("");
@@ -96,24 +100,32 @@ public class Cart extends AppCompatActivity {
 
         checkout = findViewById(R.id.btnCheckout);
         mySharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        double price = (double) mySharedPref.getFloat("myPrice", 0);
+        price = (double) mySharedPref.getFloat("myPrice", 0);
 
-        if (price<30)
-            checkout.setEnabled(false);
-        Log.e(TAG, "onCreate: "+price);
+        Log.e(TAG, "onCreate: " + price);
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(Cart.this, Complete_order.class);
-                startActivity(intent);
+                if (!(price < 30)) {
+                    if (loggedInStatus == 1) {
+                        intent = new Intent(Cart.this, Complete_order.class);
+                        startActivity(intent);
+                    } else {
+                        intent = new Intent(Cart.this, Login.class);
+                        startActivity(intent);
+                    }
+                }
+                else
+                    Toast.makeText(getApplicationContext(), "Price of your items is less than R30", Toast.LENGTH_LONG).show();
             }
+
         });
     }
 
-    public double getTotalPrice(List<CartItem>myList) {
+    public double getTotalPrice(List<CartItem> myList) {
         double sum = 0;
-        for(int i = 0;i<myList.size();i++){
-            sum+=myList.get(i).getPrice();
+        for (int i = 0; i < myList.size(); i++) {
+            sum += myList.get(i).getPrice();
         }
         return sum;
     }

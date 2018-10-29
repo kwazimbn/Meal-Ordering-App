@@ -38,7 +38,6 @@ public class Account extends AppCompatActivity {
     ArrayList<String> dates = new ArrayList<>();
     ArrayList<Integer> quantities;
     ArrayList<Double> prices;
-    int userID;
     String orderDate, message;
     Spinner spDate;
     Button viewOrders;
@@ -86,6 +85,7 @@ public class Account extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("My Account");
+
 
         connectionClass = new ConnectionClass();
 

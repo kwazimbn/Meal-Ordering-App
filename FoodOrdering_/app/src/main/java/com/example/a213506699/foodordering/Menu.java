@@ -48,8 +48,8 @@ public class Menu extends AppCompatActivity {
         loggedInStatus = sharedPref.getInt("status", 0);
         item2 = menu.findItem(R.id.logout);
         item3 = menu.findItem(R.id.login);
-        if (loggedInStatus == 0)
-            item2.setVisible(false);
+
+        item2.setVisible(false);
         item3.setVisible(false);
 
         return true;
@@ -66,8 +66,13 @@ public class Menu extends AppCompatActivity {
                 startActivity(new Intent(this, MainActivity.class));
                 return true;
             case R.id.account:
+                if(loggedInStatus == 0) {
+                    startActivity(new Intent(this, Login.class));
+                }else{
                 startActivity(new Intent(this, Login.class));
+                }
                 return true;
+
             default:
                 return false;
         }
@@ -82,6 +87,7 @@ public class Menu extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Category");
+
 
 
         connClass = new ConnectionClass();

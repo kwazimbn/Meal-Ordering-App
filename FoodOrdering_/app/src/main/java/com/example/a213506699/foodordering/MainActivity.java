@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setSubtitle("Categories");
 
 
+
         /**
          * Onclick events for categories in V-City Chicks shop
          */

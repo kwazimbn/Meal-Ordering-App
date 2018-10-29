@@ -45,7 +45,7 @@ public class CreateOrder extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-
+loggedInStatus = sharedPref.getInt("status",0);
         item2 = menu.findItem(R.id.logout);
         item3 = menu.findItem(R.id.login);
         if(loggedInStatus == 0) {
@@ -65,7 +65,10 @@ public class CreateOrder extends AppCompatActivity {
                 startActivity(new Intent(this, MainActivity.class));
                 return true;
             case R.id.account:
+                if(loggedInStatus==1)
                 startActivity(new Intent(this, Account.class));
+                else
+                    startActivity(new Intent(this, Login.class));
                 return true;
             default:
                 return false;
@@ -135,7 +138,7 @@ public class CreateOrder extends AppCompatActivity {
             public void onClick(View v) {
                 AddToCart atc = new AddToCart();
                 atc.execute("");
-                startActivity(new Intent(getApplicationContext(), com.example.a213506699.foodordering.MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
 
                 SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
