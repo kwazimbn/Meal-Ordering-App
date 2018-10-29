@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".CreateOrder">
+
+    <ImageView
+        android:id="@+id/dummyImage"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/menuDescription"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/fmenuDescription"
+        android:layout_width="198dp"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/dummyImage"
+        android:fontFamily="sans-serif"
+        android:text="Chicken Strips"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/ftxtCompleteCount"
+        android:layout_width="25dp"
+        android:layout_height="37dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="71dp"
+        android:text="1"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/fitem_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/fmenuDescription"
+        android:layout_marginEnd="13dp"
+        android:fontFamily="sans-serif"
+        android:paddingBottom="10dp"
+        android:text="R24,00"
+        android:textColor="@color/red"
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/fmenuDescription"
+        android:layout_marginTop="-14dp"
+        android:background="@color/light_grey"
+        android:paddingTop="15dp"
+        android:textSize="5sp" />
+
+</RelativeLayout>

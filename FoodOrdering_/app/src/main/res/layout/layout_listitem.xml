@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="3dp"
+    >
+
+    <ImageView
+        android:id="@+id/dummyImage"
+        android:layout_width="30dp"
+        android:layout_height="34dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/item_price" />
+
+    <TextView
+        android:id="@+id/menuDescription"
+        android:layout_width="162dp"
+        android:layout_height="39dp"
+        android:layout_alignTop="@+id/item_price"
+        android:layout_toEndOf="@+id/dummyImage"
+        android:fontFamily="sans-serif"
+        android:text="Chicken Strips"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="11dp"
+        android:fontFamily="sans-serif"
+        android:paddingBottom="10dp"
+        android:text="R24,00"
+        android:textColor="@color/red"
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/menuDescription"
+        android:background="@color/light_grey"
+        android:paddingTop="15dp"
+        android:textSize="5sp" />
+
+</RelativeLayout>
