@@ -15,10 +15,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 public class ConnectionClass
 {
-    String ip = "xxx.xxx.xxx.xx";
-    String db = "xxxxxxxx";
-    String un = "xxxxxxxx";
-    String password = "xxxxxxxxxxxxxxxxxxxxx";
+    String ip = "111.111.111.11";
+    String db = "xxxxxxx";
+    String un = "xxxxxxxxx";
+    String password = "xxxxxxxxxxxxxx";
 
     @SuppressLint("NewApi")
     public Connection CONN() {

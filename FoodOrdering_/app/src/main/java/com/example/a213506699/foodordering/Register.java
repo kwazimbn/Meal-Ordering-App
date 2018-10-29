@@ -59,12 +59,32 @@ public class Register extends AppCompatActivity {
                 uPhone = editTextUphone.getText().toString();
                 uPassword = editTextUpassword.getText().toString();
                 uCpassword = editTextUcPassword.getText().toString();
-                DoRegister doRegister = new DoRegister(uName, uEmail, uPhone, uPassword, uCpassword);
-                doRegister.execute("");
+
+                if(!uEmail.contains("@")|| !uEmail.contains(".com")|| !uEmail.contains(".co.za")|| !uEmail.contains(".ac.za")|| !uEmail.contains(".org")|| !uEmail.contains(".net")){
+                    Toast.makeText(getApplicationContext(), "Invalid email", Toast.LENGTH_LONG).show();
+                    editTextUeMail.setText("");
+
+                }
+                else if (!uPassword.equals(uCpassword)) {
+                    Toast.makeText(getApplicationContext(), "Passwords missmatch", Toast.LENGTH_LONG).show();
+                    editTextUcPassword.setText("");
+                    editTextUpassword.setText("");
+                }else if(uPassword.length()<5||uCpassword.length()<5){
+                    Toast.makeText(getApplicationContext(), "Password too short", Toast.LENGTH_LONG).show();
+                    editTextUcPassword.setText("");
+                    editTextUpassword.setText("");
+                }
+
+                else {
+                    DoRegister doRegister = new DoRegister(uName, uEmail, uPhone, uPassword, uCpassword);
+                    doRegister.execute("");
+
+                }
+
 
                 subject = "Successful Registration";
-                textMessage = "Dear "+uName+"\nWe are thrilled to be joined by you today in our lovely family. Satisfying your hunger is our goal."+
-                        "\nPlease take note of your email : "+uEmail+" and password : "+uPassword+ " as you need them to access our Foodie App";
+                textMessage = "Dear " + uName + "\nWe are thrilled to be joined by you today in our lovely family. Satisfying your hunger is our goal." +
+                        "\nPlease take note of your email : " + uEmail + " and password : " + uPassword + " as you need them to access our Foodie App";
 
                 //Log.i("MyActivity", "MyClass.getView() — i assign this issue to " + employeeID);
                 rec = uEmail;
@@ -85,7 +105,6 @@ public class Register extends AppCompatActivity {
                 task.execute();
 
             }
-
 
 
         });
@@ -117,6 +136,7 @@ public class Register extends AppCompatActivity {
 
         }
     }
+
     public class DoRegister extends AsyncTask<String, String, String> {
         String message;
         boolean status;

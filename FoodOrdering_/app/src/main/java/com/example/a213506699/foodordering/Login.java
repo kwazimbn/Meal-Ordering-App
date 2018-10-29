@@ -53,8 +53,12 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 loginEmail = editTextMail.getText().toString();
                 loginPassword = editTextPass.getText().toString();
-                DoLogin doLogin = new DoLogin(loginEmail, loginPassword);
-                doLogin.execute("");
+                if(loginEmail.length()==0||loginPassword.length()==0){
+                    Toast.makeText(getApplicationContext(),"Fill in your credentials",Toast.LENGTH_LONG).show();
+                }else {
+                    DoLogin doLogin = new DoLogin(loginEmail, loginPassword);
+                    doLogin.execute("");
+                }
             }
         });
     }
@@ -79,7 +83,7 @@ public class Login extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),Account.class));
             }
             else {
-                Toast.makeText(getApplicationContext(),"Check your credentials",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Incorrect credentials",Toast.LENGTH_LONG).show();
             }
         }
 
