@@ -94,9 +94,6 @@ public class Menu extends AppCompatActivity {
 
         PopulateMenu populateMenu = new PopulateMenu();
         populateMenu.execute("");
-        //Log.e("Array size","THE LENGTH OF MY ARRAYS IS ---:>"+menuItems.size());
-
-
     }
 
 

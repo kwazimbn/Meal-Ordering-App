@@ -28,6 +28,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Account activity. This shows account details for a user, order list and details made by the user
+ */
 public class Account extends AppCompatActivity {
     ConnectionClass connectionClass;
     TextView txtRole, txtName, txtPhNo, txtMail;
@@ -43,6 +46,9 @@ public class Account extends AppCompatActivity {
     Button viewOrders;
     int status;
 
+    /*
+    Initialization of menu on the action bar toolbar
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -54,6 +60,9 @@ public class Account extends AppCompatActivity {
 
     }
 
+    /*
+       Handling of the action bar icons, icon onclicks navigating you to the desired Activity screens
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
@@ -103,22 +112,24 @@ public class Account extends AppCompatActivity {
         txtMail.setText(eMail);
         txtPhNo.setText(phNo);
         txtName.setText(name);
-        Log.e(TAG, "onCreate: "+uRole);
-        if(uRole==1)
+        Log.e(TAG, "onCreate: " + uRole);
+        if (uRole == 1)
             txtRole.setText("Customer");
-        else if(uRole==2)
-                txtRole.setText("Staffmember");
-        else if(uRole==3)
-                txtRole.setText("Shop Manager");
-        else if(uRole==4)
-                txtRole.setText("Administrator");
-
+        else if (uRole == 2)
+            txtRole.setText("Staffmember");
+        else if (uRole == 3)
+            txtRole.setText("Shop Manager");
+        else if (uRole == 4)
+            txtRole.setText("Administrator");
 
 
         MyOrders myOrders = new MyOrders(userId);
         myOrders.execute("");
     }
 
+    /**
+     * A class used to fetch data from database using asynchronous tasks.
+     */
     public class MyOrders extends AsyncTask<String, String, String> {
         int userID;
         ArrayList<String> dates = new ArrayList<>();
@@ -139,23 +150,29 @@ public class Account extends AppCompatActivity {
             this.userID = userID;
         }
 
+        /*
+            Get dates that will be displayed on spinner.
+         */
         public ArrayList<String> getDates() {
-           try {
-               String temp = myItems.get(0).getDate();
-               dates.add(temp);
-               for (int i = 0; i < myItems.size(); i++) {
-                   if (!temp.equals(myItems.get(i).getDate()))
-                       dates.add(myItems.get(i).getDate());
-                   temp = myItems.get(i).getDate();
+            try {
+                String temp = myItems.get(0).getDate();
+                dates.add(temp);
+                for (int i = 0; i < myItems.size(); i++) {
+                    if (!temp.equals(myItems.get(i).getDate()))
+                        dates.add(myItems.get(i).getDate());
+                    temp = myItems.get(i).getDate();
 
-               }
+                }
 
-            }catch (Exception e){
-               Log.e(TAG, "getDates: "+e.getMessage() );
-           }
+            } catch (Exception e) {
+                Log.e(TAG, "getDates: " + e.getMessage());
+            }
             return dates;
         }
 
+        /*
+        After query execution
+         */
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -183,14 +200,14 @@ public class Account extends AppCompatActivity {
                         if (myItems.get(i).getDate() == spinner.getSelectedItem().toString()) {
                             quant += myItems.get(i).getQuantity() + "\n";
                             des += myItems.get(i).getDescription() + "\n";
-                            price += "R " +  Math.round(myItems.get(i).getPrice()/1.00) + "\n";
-                            total += Math.round((myItems.get(i).getPrice())/1.00);
+                            price += "R " + Math.round(myItems.get(i).getPrice() / 1.00) + "\n";
+                            total += Math.round((myItems.get(i).getPrice()) / 1.00);
                         }
                     }
                     txtDescription.setText(des);
                     txtPrice.setText(price);
-                    txtQuantity.setText(""+quant);
-                    txtTotal.setText("ORDER TOTAL\t: R "+total);
+                    txtQuantity.setText("" + quant);
+                    txtTotal.setText("ORDER TOTAL\t: R " + total);
 
 
                 }
@@ -202,7 +219,9 @@ public class Account extends AppCompatActivity {
                 }
             });
         }
-
+        /*
+        Read data and store them in order item array for future usage
+         */
         @Override
         protected String doInBackground(String... strings) {
             try {

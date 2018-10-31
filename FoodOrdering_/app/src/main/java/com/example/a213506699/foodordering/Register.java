@@ -28,6 +28,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+/**
+ * An activity to register a customer/user
+ */
 public class Register extends AppCompatActivity {
     private static final String TAG = "Register";
     ConnectionClass connectionClass;
@@ -111,6 +114,9 @@ public class Register extends AppCompatActivity {
 
     }
 
+    /**
+     * Send a feed email after successful registration
+     */
     class RetreiveFeedTask extends AsyncTask<String, Void, String> {
 
         @Override
@@ -137,6 +143,9 @@ public class Register extends AppCompatActivity {
         }
     }
 
+    /**
+     * Write registration details to database user table
+     */
     public class DoRegister extends AsyncTask<String, String, String> {
         String message;
         boolean status;
